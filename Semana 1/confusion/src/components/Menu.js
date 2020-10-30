@@ -65,9 +65,9 @@ class Menu extends React.Component{
                     {menu}                    
                 </div>  
                 <div className="row">
-                <div  className="col-12 col-md-5 m-1">
-                    {renderDish(this.state.selectedDish)}
-                  </div>
+                    <div  className="col-12 col-md-5 m-1">
+                        {renderDish(this.state.selectedDish)}
+                    </div>
                 </div>           
             </div>            
         );
