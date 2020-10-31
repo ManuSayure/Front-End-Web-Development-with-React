@@ -55,27 +55,30 @@ class DishDetails extends React.Component{
         return(date);
     }
     renderComment(comentarios){
+        var allComents = null;
+        allComents= comentarios.map((comentario)=> {  
+            return(                    
+                <li key={comentario.id}>                        
+                    <p>
+                    {comentario.comment} <br/>
+                    -- {comentario.author}, {this.getFormatDate(comentario.date)}
+                    </p>
 
-        return ( 
-            <div>
-                <h4>Comentários</h4>
-                {
-                   
-                    comentarios.map((comentario)=> {
-                        return(
-                            <div>                        
-                                <p>
-                                {comentario.comment} <br/>
-                                -- {comentario.author}, {this.getFormatDate(comentario.date)}
-                                </p>
-        
-                            </div>
-                          
-                        )
-                    })
-                }
-            </div> 
-        );
+                </li> 
+            )         
+          });
+        if(allComents != null){
+            return(
+                <div>
+                    <h4>Comentários</h4>                
+                    <ul className="list-unstyled">
+                        {allComents}
+                    </ul>
+                </div> 
+
+            )
+            
+        } else{return(<div></div>)}
       }
      
     
