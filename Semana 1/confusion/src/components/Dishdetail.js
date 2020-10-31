@@ -40,8 +40,19 @@ function RenderDetails(props){
 class DishDetails extends React.Component{
     constructor(props){
         super(props); 
-        this.renderComment = this.renderComment.bind(this)  ;   
+        this.renderComment = this.renderComment.bind(this);
+        this.getFormatDate = this.getFormatDate.bind(this);  
         
+    }
+    getFormatDate(date){
+        var d = new Date(date);
+        var months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+        var month = months[d.getMonth()];
+        var day = d.getDate().toString().padStart(2, '0');
+        var year = d.getFullYear();
+        console.log(month + " "+ day +", " + year);
+        var date = month + " "+ day +", " + year;
+        return(date);
     }
     renderComment(comentarios){
 
@@ -49,12 +60,13 @@ class DishDetails extends React.Component{
             <div>
                 <h4>Comentários</h4>
                 {
+                   
                     comentarios.map((comentario)=> {
                         return(
                             <div>                        
                                 <p>
                                 {comentario.comment} <br/>
-                                {comentario.author}, {comentario.date}
+                                -- {comentario.author}, {this.getFormatDate(comentario.date)}
                                 </p>
         
                             </div>
