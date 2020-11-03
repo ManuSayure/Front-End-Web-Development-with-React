@@ -1,6 +1,7 @@
 import React from 'react';
 
 const Footer= () =>{
+    return(
     <div className='footer'>
         <div className='container'>
             <div className='row justify-content-center'>
@@ -44,5 +45,6 @@ const Footer= () =>{
             </div>
         </div>
     </div>
+    );
 
 }; export default Footer;

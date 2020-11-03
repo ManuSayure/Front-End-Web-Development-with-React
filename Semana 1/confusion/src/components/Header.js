@@ -1,6 +1,7 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Jumbotron, Navbar, NavbarBrand } from 'reactstrap';
 const Header = () =>{
+    return(
     <React.Fragment>
         <Navbar>
             <div className='container'>
@@ -24,5 +25,6 @@ const Header = () =>{
             </div>
         </Jumbotron>
     </React.Fragment>
+    );
 
 }; export default Header;

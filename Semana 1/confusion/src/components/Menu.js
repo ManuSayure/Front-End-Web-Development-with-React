@@ -13,7 +13,7 @@ function RenderMenuItem({dish, onClick}) {
             </Card>  
         </div> 
       
-    )
+    );
 };
       
 const Menu = (props) =>{
