@@ -32,3 +32,16 @@ address{
 .navbar-dark {
     background-color: #512DA8;
 }
+.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 200px;
+    border: 3px solid green;
+  }
+  .card-subtitle{
+      color: #6c757d !important;
+      font-style: italic;
+      font-size: medium;
+
+  }

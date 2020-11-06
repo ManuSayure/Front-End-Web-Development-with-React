@@ -8,6 +8,7 @@ import Footer from './Footer';
 import Header from './Header';
 import Home from './Home';
 import Contact from './Contact';
+import About from './About';
 import DishDetail from './Dishdetail'
 import {Switch, Route, Redirect} from 'react-router-dom';
 
@@ -42,8 +43,7 @@ class Main  extends Component {
                 />
 
             );
-
-        }
+        }         
 
       
         return(
@@ -51,9 +51,10 @@ class Main  extends Component {
                 <Header/>
                 <Switch>
                     <Route path='/home' component={HomePage}/>
-                    <Route exact path='/menu' component={ () => <Menu  dishes={this.state.dishes} />}/>
+                    <Route exact path='/menu' component={ () => <Menu  dishes={this.state.dishes} />} />
                     <Route path={'/menu/:dishId'} component= {DishWithId} />
                     <Route exact path='/contactus' component={Contact}/>
+                    <Route exact path='/aboutus' component={ () => <About leaders={this.state.leaders}/>} />
                     <Redirect to='/home'/>
                 </Switch>              
                 <Footer/>
