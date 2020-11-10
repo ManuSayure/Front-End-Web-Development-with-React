@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {Breadcrumb, BreadcrumbItem} from 'reactstrap';
 import {Link} from 'react-router-dom';
+import FormContact from './FormContact';
 
 const Contact = (props) =>{
+    const [open, setOpen] = useState(false);
     return(
         <div className = 'container'>
             <div className="row">
@@ -51,6 +53,20 @@ const Contact = (props) =>{
                     </div>
                 </div>
             </div> 
+            <div className="row row-content">
+                 <div className="col-12">
+                    <h3  onClick={() => setOpen(!open)} style={{cursor: "pointer",}}>
+                             <a onmouseover = "this.style.textDecoration = 'none'"
+                             onmouseout  = "this.style.textDecoration = 'underline'">
+                                Send us your Feedback</a> </h3>
+                </div>
+                { 
+                         (open )?<FormContact/>: null
+                 
+                }
+                
+
+            </div>
         </div>
         );
 }; export default Contact;
