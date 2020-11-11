@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {Breadcrumb, BreadcrumbItem} from 'reactstrap';
 import {Link} from 'react-router-dom';
+import FormContact from './FormContact';
+//usar yup para validation
 
 const Contact = (props) =>{
+    const [open, setOpen] = useState(false);
     return(
         <div className = 'container'>
             <div className="row">
@@ -35,7 +38,12 @@ const Contact = (props) =>{
                         <div>
                             <iframe 
                              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3691.17908595958!2d114.28275111426868!3d22.30906584821582!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x34040381be582409%3A0x5ca78cbef899f174!2s121%20Clear%20Water%20Bay%20Rd%2C%20Clear%20Water%20Bay%2C%20Hong%20Kong!5e0!3m2!1spt-BR!2sbr!4v1604597793228!5m2!1spt-BR!2sbr" 
-                             style =  {{ width:"600", height:"450", frameborder:"0", style:"border:0;", allowfullscreen:"",  tabindex:"0"}}>
+                             style =  {{ 
+                                 width:"600", 
+                                 height:"450", 
+                                 frameborder:"0", 
+                                 border:"0", 
+                                 allowfullscreen:"",  tabindex:"0"}}>
 
                              </iframe>
                         </div>                 
@@ -51,6 +59,18 @@ const Contact = (props) =>{
                     </div>
                 </div>
             </div> 
+            <div className="row row-content">
+                 <div className="col-12">
+                    <h3  onClick={() => setOpen(!open)} style={{cursor: "pointer",}}>                             
+                                Send us your Feedback</h3>
+                </div>
+                { 
+                         (open )?<FormContact/>: null
+                 
+                }
+                
+
+            </div>
         </div>
         );
 }; export default Contact;
