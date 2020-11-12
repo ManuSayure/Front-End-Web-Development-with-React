@@ -1,5 +1,6 @@
 import React  from 'react';
 import {Form, FormGroup, Label, Col, Input, Button, FormFeedback} from 'reactstrap';
+import { Control, LocalForm, Errors } from 'react-redux-form';
 
 class FormContact extends React.Component{
     constructor(props){       
