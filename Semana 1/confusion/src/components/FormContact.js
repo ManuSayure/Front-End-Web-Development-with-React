@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React  from 'react';
 import {Form, FormGroup, Label, Col, Input, Button, FormFeedback} from 'reactstrap';
 
 class FormContact extends React.Component{
@@ -23,7 +23,7 @@ class FormContact extends React.Component{
             
         }
         this.baseState = this.state; 
-        this.handleInputChange = this. handleInputChange.bind(this);
+        this.handleInputChange = this.handleInputChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleBlur = this.handleBlur.bind(this);
         this.validate = this.validate.bind(this);
@@ -33,7 +33,7 @@ class FormContact extends React.Component{
         const {name, value} = event.target;
        // const value = target.type === 'checkbox' ? target.checked : target.value;
         //const name = target.name;
-        if(event.target.type == 'checkbox'){
+        if(event.target.type === 'checkbox'){
             value = event.target.checked
         }
         this.setState({[name]:value});

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Breadcrumb, BreadcrumbItem, Card, CardBody, CardHeader, Media, CardSubtitle, CardImg, CardText, CardTitle } from 'reactstrap';
+import { Breadcrumb, BreadcrumbItem, Card, CardBody, CardHeader, Media, CardSubtitle} from 'reactstrap';
 import { Link } from 'react-router-dom';
 
 function About(props) {    
@@ -14,7 +14,7 @@ function About(props) {
                     <Media body top className='ml-4 mb-3 text-justify'>
                         <Media heading> {leader.name} </Media>
 
-                            {leader.designation ? <CardSubtitle className="mt-2 mb-3">{leader.designation}</CardSubtitle> : null}
+                            {leader.designation ? <CardSubtitle className="mt-2 mb-3 cardsubtitle">{leader.designation}</CardSubtitle> : null}
 
                             {leader.description}
                         
