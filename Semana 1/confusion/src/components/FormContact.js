@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React  from 'react';
 import {Form, FormGroup, Label, Col, Input, Button, FormFeedback} from 'reactstrap';
 
 class FormContact extends React.Component{
