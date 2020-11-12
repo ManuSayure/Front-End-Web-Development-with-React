@@ -1,8 +1,4 @@
 import React, { Component } from 'react';
-import { DISHES } from './shared/dishes';
-import {COMMENTS} from './shared/comments'
-import {LEADERS} from './shared/leaders';
-import {PROMOTIONS} from './shared/promotions';
 import Menu from './Menu'
 import Footer from './Footer';
 import Header from './Header';

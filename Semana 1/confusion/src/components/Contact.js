@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import {Breadcrumb, BreadcrumbItem} from 'reactstrap';
 import {Link} from 'react-router-dom';
 import FormContact from './FormContact';
+import FormContatctRedux from './FormContactRedux';
 //usar yup para validation
 
 const Contact = (props) =>{
@@ -64,10 +65,13 @@ const Contact = (props) =>{
                     <h3  onClick={() => setOpen(!open)} style={{cursor: "pointer",}}>                             
                                 Send us your Feedback</h3>
                 </div>
+                <div className="col-12">
                 { 
-                         (open )?<FormContact/>: null
-                 
+                         //(open )?<FormContact/>: null
+                         (open )?<FormContatctRedux/>: null                 
                 }
+                </div>
+                
                 
 
             </div>
