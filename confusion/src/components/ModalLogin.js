@@ -19,7 +19,9 @@ class ModalLogin extends React.Component{
     render(){
         return(
             <Modal isOpen={this.props.isModalOpen} >
-                <ModalHeader >Login</ModalHeader>
+                <ModalHeader>Loginss
+                
+                </ModalHeader>
                 <ModalBody> 
                     <Form onSubmit={this.handleLogin}>
                         <FormGroup>

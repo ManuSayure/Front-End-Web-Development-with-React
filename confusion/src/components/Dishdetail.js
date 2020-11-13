@@ -1,13 +1,16 @@
 import React, {useState} from "react";
 import { Card, CardImg, CardText, CardBody, CardTitle, 
-    BreadcrumbItem, Breadcrumb, Button, Modal, ModalBody, ModalHeader } from 'reactstrap';
+    BreadcrumbItem, Breadcrumb, Button, Modal, ModalBody, ModalHeader, Row } from 'reactstrap';
 import {Link } from 'react-router-dom';
 import FormComment from './FormComment';
 
-const ModalComment= (props) =>{
+const CommentForm= (props) =>{
     return(
         <Modal isOpen={props.isOpenModalComment}>
-                <ModalHeader >Submit Comment</ModalHeader>
+                <ModalHeader toggle={props.toggleModal}  >
+                Submit 
+                    
+                </ModalHeader>
                 <ModalBody> 
                     <FormComment {...props}/>
                 </ModalBody>
@@ -54,7 +57,7 @@ function RenderComments({comments, toggleModal}) {
                     <ul className="list-unstyled">
                         {allComments}
                     </ul>  
-                    <Button color='primary' onClick = {toggleModal}>Submit Comment</Button>                
+                    <Button type='submit' color='secondary' onClick = {toggleModal}>Submit Comment</Button>                
                 </div> 
 
             )
@@ -63,6 +66,7 @@ function RenderComments({comments, toggleModal}) {
             return(
                     <div className="col-12 col-md-5 m-1">
                         <h4> Be the first to comment</h4>
+                        <Button type='sub' color='secondary' onClick = {toggleModal}>Submit Comment</Button>
                        
                     </div>
             )
@@ -100,8 +104,9 @@ function RenderComments({comments, toggleModal}) {
                     
                     />}                                  
                 </div>
-                <ModalComment isOpenModalComment={ isOpenModalComment}
-                toggleModal= {toggleModal}
+                <CommentForm 
+                    isOpenModalComment={ isOpenModalComment}
+                    toggleModal= {toggleModal}
                 /> 
                 
                

@@ -100,7 +100,7 @@ class Header extends React.Component{
                         </div>
                     </div>
                 </Jumbotron>
-                <Modal isOpen={this.state.isModalOpen} >
+                <Modal toggle={this.toggleModal} isOpen={this.state.isModalOpen} >
                 <ModalHeader >Login</ModalHeader>
                 <ModalBody> 
                     <Form onSubmit={this.handleLogin}>
