@@ -54,10 +54,10 @@ function RenderComments({comments, toggleModal}) {
             return(
                 <div className="col-12 col-md-5 m-1">
                     <h4>Comentários</h4>                
-                    <ul className="list-unstyled">
+                    <ul className="list-unstyled"> 
                         {allComments}
                     </ul>  
-                    <Button type='submit' color='secondary' onClick = {toggleModal}>Submit Comment</Button>                
+                    <Button type='submit' color='secondary' onClick = {toggleModal}> <span className="fa fa-pencil fa-lg mr-1"></span>Submit Comment</Button>                
                 </div> 
 
             )

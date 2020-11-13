@@ -9,6 +9,17 @@
     border-bottom: 1px ridge;
     min-height:400px;
 }
+a.nav-estilo {    
+    color: white;      
+}
+a.nav-estilo:active{
+    color: coral;
+}
+a.nav-estilo:hover
+{      
+    color: cornflowerblue;
+     cursor:pointer;  
+}
 
 .footer{
     background-color: #D1C4E9;
@@ -29,8 +40,10 @@ address{
     color:#0f0f0f;
 }
 
-.navbar-dark {
+.navbar-color {
     background-color: #512DA8;
+    color: white;
+   
 }
 .center {
     display: flex;
