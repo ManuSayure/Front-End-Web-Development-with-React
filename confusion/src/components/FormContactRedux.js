@@ -1,6 +1,5 @@
 import React  from 'react';
-import { Breadcrumb, BreadcrumbItem,
-    Button, Row, Col, Label } from 'reactstrap';
+import {Button, Row, Col, Label } from 'reactstrap';
 import { Control, LocalForm, Errors } from 'react-redux-form';
 
 
@@ -13,8 +12,7 @@ const validEmail = (val) => /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(val
 class FormContatctRedux extends React.Component{
     constructor(props){       
         
-        super(props);
-       
+        super(props);       
         this.state = {
             firstname: '',
             lastname: '',
@@ -23,12 +21,12 @@ class FormContatctRedux extends React.Component{
             agree:false,
             contactType:"Tel.",
             message:'',
-            touched: {
+           /* touched: {
                 firstname: false,
                 lastname: false,
                 telnum: false,
                 email: false
-            }
+            }*/
             
         }
         this.baseState = this.state; 
@@ -70,7 +68,7 @@ class FormContatctRedux extends React.Component{
                             <Control.text model=".firstname" id="firstname" name="firstname"
                                  placeholder="First Name"
                                  className="form-control"
-                                 alidators={{
+                                 validators={{
                                     required, minLength: minLength(3), maxLength: maxLength(15)
                                 }}
                             />

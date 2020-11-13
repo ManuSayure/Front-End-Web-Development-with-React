@@ -1,8 +1,23 @@
-import React from "react";
-import { Card, CardImg, CardText, CardBody, CardTitle, BreadcrumbItem, Breadcrumb } from 'reactstrap';
+import React, {useState} from "react";
+import { Card, CardImg, CardText, CardBody, CardTitle, 
+    BreadcrumbItem, Breadcrumb, Button, Modal, ModalBody, ModalHeader } from 'reactstrap';
 import {Link } from 'react-router-dom';
+import FormComment from './FormComment';
+
+const ModalComment= (props) =>{
+    return(
+        <Modal isOpen={props.isOpenModalComment}>
+                <ModalHeader >Submit Comment</ModalHeader>
+                <ModalBody> 
+                    <FormComment {...props}/>
+                </ModalBody>
+        </Modal>
+    );    
+};
+
 
 function RenderDetails({dish}){
+    
     return(
     (dish != null) ?
         <div className="col-12 col-md-5 m-1">
@@ -17,7 +32,8 @@ function RenderDetails({dish}){
          : <div></div>    
          )
 }
-function RenderComments({comments}) {
+function RenderComments({comments, toggleModal}) {
+
     var allComments = null;
         allComments = comments.map(
             (comment) => {  
@@ -37,16 +53,33 @@ function RenderComments({comments}) {
                     <h4>Comentários</h4>                
                     <ul className="list-unstyled">
                         {allComments}
-                    </ul>
+                    </ul>  
+                    <Button color='primary' onClick = {toggleModal}>Submit Comment</Button>                
                 </div> 
 
             )
             
-        } else{return(<div></div>)}
+        } else{
+            return(
+                    <div className="col-12 col-md-5 m-1">
+                        <h4> Be the first to comment</h4>
+                       
+                    </div>
+            )
+        }
 };
  
 
  const DishDetails = (props) => { 
+
+    const [isOpenModalComment, setIsOpenModalComment] = useState(false);
+
+     const toggleModal = () =>{
+         console.log('click');
+         setIsOpenModalComment(!isOpenModalComment)
+         console.log(isOpenModalComment)
+      }  
+
      return(
             <div className= "container"> 
                 <div className="row">
@@ -61,9 +94,17 @@ function RenderComments({comments}) {
                     </div>           
                 <div className="row">
                     <RenderDetails dish={props.dish}/>            
-                    {props.dish && <RenderComments comments = {props.comments}/>}
-                                  
-                </div> 
+                    {props.dish && <RenderComments 
+                    comments = {props.comments}
+                    toggleModal= {toggleModal}
+                    
+                    />}                                  
+                </div>
+                <ModalComment isOpenModalComment={ isOpenModalComment}
+                toggleModal= {toggleModal}
+                /> 
+                
+               
             </div>
             
         );          
