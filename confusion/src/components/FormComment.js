@@ -8,14 +8,7 @@ const minLength = (len) => (val) => val && (val.length >= len);
 class FormComment extends React.Component{
     constructor(props){
         super(props);
-        this.state = {
-            comment:{
-                rating: "",
-                name: "", 
-                message: ""
-            }
-
-        }
+       
     }
     handleSubmit(values){      
         // event.preventDefault();
@@ -24,9 +17,7 @@ class FormComment extends React.Component{
          //this.resetForm();  
          
      };
-     resetForm = () => {      
-        this.setState(this.baseState);        
-     };
+    
     render(){
             var options = [1, 2, 3, 4, 5]
             var result = null;            
