@@ -41,7 +41,7 @@ class Header extends React.Component{
     render(){
         return(
             <React.Fragment>        
-                <Navbar dark expand="lg">
+                <Navbar className="navbar-color" expand="lg">
                     <div className='container'>
                         <NavbarToggler onClick={this.toggleNav}/>                
                             <NavbarBrand className='mr-auto' href='/'>
@@ -49,30 +49,30 @@ class Header extends React.Component{
                             </NavbarBrand>
                             <Collapse isOpen={this.state.isNavOpen} navbar>
                                 <Nav navbar>
-                                    <NavItem>
-                                        <NavLink className='nav-link' to='/home'>
-                                            <span className='fa fa-home fa-lg'/>
+                                    <NavItem className="ml-3">
+                                        <NavLink className='nav-link nav-estilo' to='/home'>
+                                            <span className='fa fa-home fa-lg mr-1'/>
                                               Home
                                         </NavLink>
                                     </NavItem>
         
-                                    <NavItem>
-                                        <NavLink className='nav-link' to='/aboutus'>
-                                            <span  className=' fa fa-info fa-lg'/>
+                                    <NavItem className="ml-3">
+                                        <NavLink className='nav-link nav-estilo' to='/aboutus'>
+                                            <span  className=' fa fa-info fa-lg mr-1'/>
                                              About Us
                                         </NavLink>
                                     </NavItem>
         
-                                    <NavItem>
-                                        <NavLink className='nav-link' to='/menu'>
-                                            <span className='fa fa-list fa-lg'/>
+                                    <NavItem className="ml-3">
+                                        <NavLink className='nav-link nav-estilo' to='/menu'>
+                                            <span className='fa fa-list fa-lg mr-1'/>
                                             Menu
                                         </NavLink>
                                     </NavItem>
         
-                                    <NavItem>
-                                        <NavLink className='nav-link' to='/contactus'>
-                                            <span className='fa fa-address-card fa-lg'/>
+                                    <NavItem className="ml-3"> 
+                                        <NavLink className='nav-link nav-estilo' to='/contactus'>
+                                            <span className='fa fa-address-card fa-lg mr-1'/>
                                              Contact Us                                    
                                         </NavLink>
                                     </NavItem>                            
@@ -100,7 +100,7 @@ class Header extends React.Component{
                         </div>
                     </div>
                 </Jumbotron>
-                <Modal isOpen={this.state.isModalOpen} >
+                <Modal toggle={this.toggleModal} isOpen={this.state.isModalOpen} >
                 <ModalHeader >Login</ModalHeader>
                 <ModalBody> 
                     <Form onSubmit={this.handleLogin}>
