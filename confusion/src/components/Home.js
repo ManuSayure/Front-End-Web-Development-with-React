@@ -5,7 +5,7 @@ const RenderCard = ({item}) => {
     return(
         <div className="col-12 col-md m-1">
             <Card>
-                <CardImg src={item.image}/>
+                <CardImg src={`/confusion${item.image}`}/>
                 <CardBody>
                     <CardTitle>{item.name}</CardTitle>
                     {item.designation ? <CardSubtitle>{item.designation}</CardSubtitle> : null}
