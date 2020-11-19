@@ -6,12 +6,12 @@ import {Provider} from "react-redux";
 import {ConfigureStore} from './redux/configureStore';
 
 
-const store = ConfigureStore();
+//const store = ConfigureStore();
 class App extends React.Component{  
   
   render(){
     return (
-      <Provider store= {store}>
+      <Provider store= {ConfigureStore()}>
         <BrowserRouter>
           <div className="App">
             <Main/>
