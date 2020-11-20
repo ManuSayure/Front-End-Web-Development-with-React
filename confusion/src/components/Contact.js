@@ -68,7 +68,7 @@ const Contact = (props) =>{
                 <div className="col-12">
                 { 
                          //(open )?<FormContact/>: null
-                         (open )?<FormContatctRedux/>: null                 
+                         (open )?<FormContatctRedux {...props}/>: null                 
                 }
                 </div>
                 

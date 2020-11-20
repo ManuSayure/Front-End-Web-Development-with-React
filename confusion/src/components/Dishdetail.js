@@ -134,7 +134,7 @@ class CommentForm extends React.Component {
                                className="form-control custom-select mr-sm-2">                             
                                    { this.options.map( 
                                        (i) => {  
-                                           if(i == 1){
+                                           if(i === 1){
                                             return(<option key={i} selected>{i}</option>)
                                            }
                                            return( <option key={i}>{i}</option>); 
