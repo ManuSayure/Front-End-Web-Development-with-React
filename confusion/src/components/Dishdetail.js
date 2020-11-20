@@ -4,17 +4,40 @@ import { Card, CardImg, CardText, CardBody, CardTitle,
 import {Link } from 'react-router-dom';
 import {  Col, Label} from 'reactstrap';
 import {Control, LocalForm, Errors} from 'react-redux-form'
-import { addComment } from "../redux/ActionCreators";
+import { Loading } from './Loading';
+import { Comments } from "../redux/comments";
 //import FormComment from './FormComment';
+//const comments = useSelector(state => state.comments)
+//const dispatch = useDispatch()
+
+console.log(Comments);
 
 const required = (val) => val && val.length;
 const maxLength = (len) => (val) => !(val) || (val.length <= len);
 const minLength = (len) => (val) => val && (val.length >= len);
 
-function RenderDish({dish}){
+
+function RenderDish({dish, isLoading, errMess}){   
     
-    return(
-    (dish != null) ?
+        if (isLoading) {
+            return(
+                <div className="container">
+                    <div className="row">            
+                        <Loading />
+                    </div>
+                </div>
+            );
+        }
+        else if (errMess) {
+            return(
+                <div className="container">
+                    <div className="row">            
+                        <h4>{errMess}</h4>
+                    </div>
+                </div>
+            );
+        }
+        else if (dish != null){
         <div className="col-12 col-md-5 m-1">
             <Card>
                 <CardImg top src={dish.image} alt={dish.name}/>
@@ -23,12 +46,11 @@ function RenderDish({dish}){
                     <CardText>{dish.description}</CardText>
                 </CardBody>
             </Card> 
-        </div>       
-         : <div></div>    
-         )
+        </div>  
+        }     
+    
 }
-function RenderComments({comments, addComment, dishId}) {
-
+function RenderComments({comments, addComment, dishId}) { 
     
        
         if(comments != null){
@@ -73,13 +95,10 @@ class CommentForm extends React.Component {
         };
         this.options = [1, 2, 3, 4, 5];
         this.handleSubmit = this.handleSubmit.bind(this);
-        this.toggleModal = this.toggleModal.bind(this);       
-        
+        this.toggleModal = this.toggleModal.bind(this); 
+        console.log(this.props);          
          
     }
-   
-  
- 
    
     toggleModal = () => {
         console.log('click');
@@ -88,14 +107,14 @@ class CommentForm extends React.Component {
         console.log(this.state.showModalComment)
      } ; 
  
-    handleSubmit = (values) => {            
-         
-       addComment(this.props.dishId, values.seletRating, values.author, values.comment) 
-   };  
-      
+    handleSubmit =  (values) => { 
+        this.toggleModal();
+        this.props.addComment(this.props.dishId, values.rating, values.author, values.comment);     
+    };  
        
 
    render(){
+       
         return(
        <div>
            <Button  color='secondary' onClick = {this.toggleModal}>Submit Comment</Button>
@@ -104,7 +123,7 @@ class CommentForm extends React.Component {
                Submit                   
                </ModalHeader>
                <ModalBody> 
-               <LocalForm onSubmit={this.handleSubmit}>
+               <LocalForm onSubmit={ ()=> this.handleSubmit}>
                    <Row>
                        <Label for="selectRating" md={10}>Rating</Label>
                        <Col md={12}>
@@ -115,8 +134,11 @@ class CommentForm extends React.Component {
                                className="form-control custom-select mr-sm-2">                             
                                    { this.options.map( 
                                        (i) => {  
-                                               return( <option key={i}>{i}</option>); 
-                               })}
+                                           if(i == 1){
+                                            return(<option key={i} selected>{i}</option>)
+                                           }
+                                           return( <option key={i}>{i}</option>); 
+                                   })}
                            </Control.select>                    
                        </Col> 
                        <Errors
@@ -187,10 +209,7 @@ class DishDetails extends React.Component{
         super(props);
         
     } 
-
     render(){  
-
-
         return(
             <div className= "container"> 
                 <div className="row">

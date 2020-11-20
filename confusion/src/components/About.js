@@ -9,7 +9,7 @@ function About(props) {
             <div>
                 <Media key = {leader.id} className='mb-3'>
                     <Media left top href ="#">
-                        <Media object src={leader.image}/>             
+                        <Media object src={`/confusion${leader.image}`}/>             
                     </Media>                
                     <Media body top className='ml-4 mb-3 text-justify'>
                         <Media heading> {leader.name} </Media>
