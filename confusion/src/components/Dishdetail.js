@@ -6,7 +6,7 @@ import {  Col, Label} from 'reactstrap';
 import {Control, LocalForm, Errors} from 'react-redux-form'
 import { Loading } from './Loading';
 import { Comments } from "../redux/comments";
-import {baseURL} from '../shared/baseURL';
+import {baseUrl} from '../shared/baseUrl';
 //import FormComment from './FormComment';
 //const comments = useSelector(state => state.comments)
 //const dispatch = useDispatch()

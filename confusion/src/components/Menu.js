@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Card, CardImg, CardImgOverlay, CardTitle, Breadcrumb, BreadcrumbItem } from 'reactstrap';
-import {baseURL} from '../redux/baseURL';
+import {baseUrl} from '../shared/baseUrl';
 
 function RenderMenuItem({dish, onClick}) {
     console.log(dish)

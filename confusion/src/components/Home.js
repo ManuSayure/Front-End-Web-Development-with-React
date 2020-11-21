@@ -1,9 +1,10 @@
 import React from 'react';
 import {Loading} from './Loading';
 import { Card, CardBody, CardImg, CardSubtitle, CardText, CardTitle } from 'reactstrap';
-import {baseURL} from 'baseURL';
+import {baseUrl} from '../shared/baseUrl';
 
 const RenderCard = ({item, isLoading, errMess}) => {
+    console.log(item, item.image );
   
         if (isLoading) {
             return(
@@ -32,7 +33,9 @@ const RenderCard = ({item, isLoading, errMess}) => {
     
 };
 const Home = (props) =>{
-    console.log(props);
+   
+    console.log(props.leader);
+    console.log(props.dish);
     const RenderListCards = () => {
         return(
             <div className="row align-items-start">

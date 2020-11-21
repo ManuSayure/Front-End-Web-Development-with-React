@@ -1,24 +1,109 @@
 import * as ActionTypes  from './ActionTypes';
 import { baseUrl } from '../shared/baseUrl';
+import fetch from 'cross-fetch';
+const axios = require('axios').default;
 
-export const addComment = (dishId, rating, author, comment) => (
-    {
-        type: ActionTypes.ADD_COMMENT,
-        payload: {
-            dishId: dishId,
-            rating: rating,
-            author: author,
-            comment: comment
-        }
-   
+export const addComment = (comment) => ({
+    type: ActionTypes.ADD_COMMENT,
+    payload: comment
 });
-export const fetchDishes = () => (dispatch) => {
+export const postComment = (dishId, rating, author, comment) => (dispatch) => {
+
+    const newComment = {
+        dishId: dishId,
+        rating: rating,
+        author: author,
+        comment: comment
+    };
+    newComment.date = new Date().toISOString();
+    
+    return fetch(baseUrl + 'comments', {
+        method: "POST",
+        body: JSON.stringify(newComment),
+        headers: {
+          "Content-Type": "application/json"
+        },
+        credentials: "same-origin"
+    })
+    .then(response => {
+        if (response.ok) {
+          return response;
+        } else {
+          var error = new Error('Error ' + response.status + ': ' + response.statusText);
+          error.response = response;
+          throw error;
+        }
+      },
+      error => {
+            throw error;
+      })
+    .then(response => response.json())
+    .then(response => dispatch(addComment(response)))
+    .catch(error =>  { console.log('post comments', error.message); alert('Your comment could not be posted\nError: '+error.message); });
+};
+
+
+ 
+export const teste = (async () => {
+  try {
+    const res = await fetch(baseUrl + 'dishes');
+    
+    if (res.status >= 400) {
+      throw new Error("Bad response from server");
+    }
+    
+    const dishes = await res.json();
+  
+    console.log(dishes);
+  } catch (err) {
+    console.error(err);
+  }
+})();
+export const teste2 =  fetch(baseUrl + 'dishes')
+        .then(res => {
+        if (res.status >= 400) {
+            throw new Error("Bad response from server");
+        }
+        return res.json();
+        })
+        .then(dishes => {
+        console.log(dishes);
+        })
+        .catch(err => {
+        console.error(err);
+        });
+export function teste3() {
+     
+      return function(dispatch) {
+        dispatch(dishesLoading(true));
+       return axios.get(baseUrl + 'dishes')
+            .then(({ data }) => {
+             console.log(data);
+             dispatch(addDishes(data));});
+            };
+          }
+               
+export  const fetchDishes = () => (dispatch) => {
 
     dispatch(dishesLoading(true));
 
-    return fetch(baseUrl + 'dishes')
+    return  fetch(baseUrl + 'dishes')
+    .then(response => {
+        if (response.ok) {
+          return response;
+        } else {
+          var error = new Error('Error ' + response.status + ': ' + response.statusText);
+          error.response = response;
+          throw error;
+        }
+      },
+      error => {
+            var errmess = new Error(error.message);
+            throw errmess;
+      })
     .then(response => response.json())
-    .then(dishes => dispatch(addDishes(dishes)));
+    .then(dishes => dispatch(addDishes(dishes)))
+    .catch(error => dispatch(dishesFailed(error.message)));
 }
 
 export const dishesLoading = () => ({
@@ -35,10 +120,25 @@ export const addDishes = (dishes) => ({
     payload: dishes
 });
 
+/** */
 export const fetchComments = () => (dispatch) => {    
     return fetch(baseUrl + 'comments')
+    .then(response => {
+        if (response.ok) {
+          return response;
+        } else {
+          var error = new Error('Error ' + response.status + ': ' + response.statusText);
+          error.response = response;
+          throw error;
+        }
+      },
+      error => {
+            var errmess = new Error(error.message);
+            throw errmess;
+      })
     .then(response => response.json())
-    .then(comments => dispatch(addComments(comments)));
+    .then(comments => dispatch(addComments(comments)))
+    .catch(error => dispatch(commentsFailed(error.message)));
 };
 
 export const commentsFailed = (errmess) => ({
@@ -50,14 +150,28 @@ export const addComments = (comments) => ({
     type: ActionTypes.ADD_COMMENTS,
     payload: comments
 });
-
+/** */
 export const fetchPromos = () => (dispatch) => {
     
     dispatch(promosLoading());
 
     return fetch(baseUrl + 'promotions')
+    .then(response => {
+        if (response.ok) {
+          return response;
+        } else {
+          var error = new Error('Error ' + response.status + ': ' + response.statusText);
+          error.response = response;
+          throw error;
+        }
+      },
+      error => {
+            var errmess = new Error(error.message);
+            throw errmess;
+      })
     .then(response => response.json())
-    .then(promos => dispatch(addPromos(promos)));
+    .then(promos => dispatch(addPromos(promos)))
+    .catch(error => dispatch(promosFailed(error.message)));
 }
 
 export const promosLoading = () => ({
@@ -72,4 +186,42 @@ export const promosFailed = (errmess) => ({
 export const addPromos = (promos) => ({
     type: ActionTypes.ADD_PROMOS,
     payload: promos
+});
+/** */
+export const fetchLeaders = () => (dispatch) => {
+    
+    dispatch(leadersLoading());
+
+    return fetch(baseUrl + 'leaders')
+    .then(response => {
+        if (response.ok) {
+          return response;
+        } else {
+          var error = new Error('Error ' + response.status + ': ' + response.statusText);
+          error.response = response;
+          throw error;
+        }
+      },
+      error => {
+            var errmess = new Error(error.message);
+            throw errmess;
+      })
+    .then(response => response.json())
+    .then(leaders => dispatch(addLeaders(leaders)))
+    .catch(error => dispatch(leadersFailed(error.message)));
+    
+}
+
+export const leadersLoading = () => ({
+    type: ActionTypes.LEADERS_LOADING
+});
+
+export const leadersFailed = (errmess) => ({
+    type: ActionTypes.LEADERS_FAILED,
+    payload: errmess
+});
+
+export const addLeaders = (leaders) => ({
+    type: ActionTypes.ADD_LEADERS,
+    payload: leaders
 });
