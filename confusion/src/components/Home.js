@@ -1,6 +1,7 @@
 import React from 'react';
 import {Loading} from './Loading';
 import { Card, CardBody, CardImg, CardSubtitle, CardText, CardTitle } from 'reactstrap';
+import {baseURL} from 'baseURL';
 
 const RenderCard = ({item, isLoading, errMess}) => {
   
@@ -18,7 +19,7 @@ const RenderCard = ({item, isLoading, errMess}) => {
             return( 
                     <div className="col-12 col-md m-1">
                         <Card>
-                            <CardImg src={`/confusion${item.image}`}/>
+                            <CardImg src={baseUrl + item.image}/>
                             <CardBody>
                                 <CardTitle>{item.name}</CardTitle>
                                 {item.designation ? <CardSubtitle>{item.designation}</CardSubtitle> : null}

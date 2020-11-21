@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Card, CardImg, CardImgOverlay, CardTitle, Breadcrumb, BreadcrumbItem } from 'reactstrap';
-
+import {baseURL} from '../redux/baseURL';
 
 function RenderMenuItem({dish, onClick}) {
     console.log(dish)
@@ -9,7 +9,7 @@ function RenderMenuItem({dish, onClick}) {
         <div  className="col-12 col-md-5 m-1">
             <Card>
                  <Link to={`/menu/${dish.id}`} >
-                    <CardImg width="100%" src={ `/confusion${dish.image}`} alt={dish.name}/>   
+                    <CardImg width="100%"  src={baseUrl + dish.image} alt={dish.name}/>   
                     <CardImgOverlay>
                         <CardTitle>{dish.name}</CardTitle>
                     </CardImgOverlay>  
