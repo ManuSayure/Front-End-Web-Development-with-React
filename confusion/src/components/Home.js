@@ -4,7 +4,8 @@ import { Card, CardBody, CardImg, CardSubtitle, CardText, CardTitle } from 'reac
 import {baseUrl} from '../shared/baseUrl';
 
 const RenderCard = ({item, isLoading, errMess}) => {
-    console.log(item, item.image );
+    console.log(isLoading);
+   
   
         if (isLoading) {
             return(
@@ -34,14 +35,18 @@ const RenderCard = ({item, isLoading, errMess}) => {
 };
 const Home = (props) =>{
    
-    console.log(props.leader);
+    console.log(props.dishesLoading);
+    console.log(props.promoLoading);
+    console.log(props.leaderLoading);
     console.log(props.dish);
+    console.log(props.promotion)
+    console.log(props.leader)
     const RenderListCards = () => {
         return(
             <div className="row align-items-start">
-                <RenderCard key= {1}  item={props.dish} isLoading={props.dishesLoading} errMess={props.dishesErrMess}/>
-                <RenderCard key ={2} item= {props.promotion}  />
-                <RenderCard key = {3} item= {props.leader}/>
+                <RenderCard key= {1}  item={props.dish} isLoading={props.dishesLoading} errMess={props.disheErrMess}/>
+                <RenderCard key ={2} item= {props.promotion} isLoading={props.promoLoading} errMess={props.promoErrMess}  />
+                <RenderCard key = {3} item= {props.leader} isLoading={props.leaderLoading} errMess={props.leaderErrMess}/>
         </div> 
         );       
                  

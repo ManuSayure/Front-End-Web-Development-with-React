@@ -11,6 +11,7 @@ import {connect} from 'react-redux';
 import { actions } from 'react-redux-form';
 
 import { postComment, fetchDishes, fetchComments, fetchPromos, fetchLeaders, teste, teste2, teste3 } from '../redux/ActionCreators';
+import DishDetails from './Dishdetail';
 
 
 const mapStateToProps = state => {
@@ -28,10 +29,7 @@ const mapStateToProps = state => {
         fetchDishes:   () => { dispatch(fetchDishes())},
         fetchComments: () => {dispatch(fetchComments())},
         fetchPromos:   () => {dispatch(fetchPromos())},
-        fetchLeaders:  () => {dispatch(fetchLeaders())},
-        teste: () => {dispatch(teste())},
-        teste2: () => {dispatch(teste2())},
-        teste3: () => {teste3()},
+        fetchLeaders:  () => {dispatch(fetchLeaders())},        
         postComment: (dishId, rating, author, comment) => dispatch(postComment(dishId, rating, author, comment))
       }
   }    
@@ -51,9 +49,7 @@ const mapStateToProps = state => {
         this.props.fetchComments();
         this.props.fetchPromos();
         this.props.fetchLeaders(); 
-        this.props.teste();  
-        this.props.teste2();
-        this.props.teste3(); 
+       
 
        
       }
@@ -67,25 +63,24 @@ const mapStateToProps = state => {
                     promotion={this.props.promotions.promotions.filter((promo) => promo.featured)[0]}
                     promoLoading={this.props.promotions.isLoading}
                     promoErrMess={this.props.promotions.errMess}
-                    leaders={this.props.leaders.leaders.filter((leader) => leader.featured)[0]}
-                    leadersLoading={this.props.leaders.isLoading}
-                    leadersErrMess={this.props.leaders.errMess}
+                    leader={this.props.leaders.leaders.filter((leader) => leader.featured)[0]}
+                    leaderLoading={this.props.leaders.isLoading}
+                    leaderErrMess={this.props.leaders.errMess}
                     />
             );
         };
-        const DishWithId = ({match}) =>{
+        const DishWithId = ({match}) => {
             return(
-                <DishDetail 
+                <DishDetails
                     dish={this.props.dishes.dishes.filter((dish) => dish.id === parseInt(match.params.dishId,10))[0]}
                     isLoading={this.props.dishes.isLoading}
                     errMess={this.props.dishes.errMess}
                     comments={this.props.comments.comments.filter((comment) => comment.dishId === parseInt(match.params.dishId,10))}
                     commentsErrMess={this.props.comments.errMess}
                     //addComment={this.props.addComment}
-                    postComment={this.props.postComment}
-              />
-
-            );
+                    postComment={this.props.postComment}               
+                 />
+            );           
         }         
 
       
