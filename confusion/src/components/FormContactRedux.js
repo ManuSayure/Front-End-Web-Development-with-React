@@ -1,6 +1,6 @@
 import React  from 'react';
 import {Button, Row, Col, Label } from 'reactstrap';
-import { Control, LocalForm, Errors } from 'react-redux-form';
+import { Control, Form, Errors, actions } from 'react-redux-form';
 
 
 const required = (val) => val && val.length;
@@ -10,7 +10,8 @@ const isNumber = (val) => !isNaN(Number(val));
 const validEmail = (val) => /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(val);
 
 class FormContatctRedux extends React.Component{
-    constructor(props){       
+    constructor(props){   
+           
         
         super(props);       
         this.state = {
@@ -27,14 +28,16 @@ class FormContatctRedux extends React.Component{
                 telnum: false,
                 email: false
             }*/
-            
+           
         }
+        console.log(props) ;
         this.baseState = this.state; 
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
        
 
     }
+    
     handleInputChange(event){
         const {name, value} = event.target;
        // const value = target.type === 'checkbox' ? target.checked : target.value;
@@ -47,9 +50,11 @@ class FormContatctRedux extends React.Component{
     };
     handleSubmit(values){      
        // event.preventDefault();
+        this.props.resetFeedbackForm();
         console.log('Current State is: ' + JSON.stringify(values));
         alert('Current State is: ' + JSON.stringify(values));  
-        this.resetForm();  
+        
+      this.resetForm();  
         
     };
     resetForm = () => {      
@@ -61,7 +66,7 @@ class FormContatctRedux extends React.Component{
 
     render(){
         return(
-                <LocalForm onSubmit={(values) => this.handleSubmit(values)}>
+                <Form  model="feedback" onSubmit={(values) => this.handleSubmit(values)}>
                     <Row className="form-group">
                          <Label htmlFor="firstname" md={2}>First Name</Label>
                         <Col md={10}>
@@ -184,7 +189,7 @@ class FormContatctRedux extends React.Component{
                             </Button>
                         </Col>
                     </Row>
-                </LocalForm>
+                </Form>
 
         );
     }

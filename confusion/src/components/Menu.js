@@ -1,14 +1,15 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Card, CardImg, CardImgOverlay, CardTitle, Breadcrumb, BreadcrumbItem } from 'reactstrap';
-
+import {baseUrl} from '../shared/baseUrl';
 
 function RenderMenuItem({dish, onClick}) {
+    console.log(dish)
     return(
         <div  className="col-12 col-md-5 m-1">
             <Card>
-                <Link to={`/menu/${dish.id}`} >
-                    <CardImg width="100%" src={dish.image} alt={dish.name}/>   
+                 <Link to={`/menu/${dish.id}`} >
+                    <CardImg width="100%"  src={baseUrl + dish.image} alt={dish.name}/>   
                     <CardImgOverlay>
                         <CardTitle>{dish.name}</CardTitle>
                     </CardImgOverlay>  
@@ -19,6 +20,7 @@ function RenderMenuItem({dish, onClick}) {
 };
       
 const Menu = (props) =>{
+    
         const menu = props.dishes.map(
             (dish) => {
                 return(
