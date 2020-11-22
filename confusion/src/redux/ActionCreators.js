@@ -1,5 +1,5 @@
 import * as ActionTypes  from './ActionTypes';
-import { baseUrl } from '../shared/baseUrl';
+import { baseUrl } from '../shared/baseURL';
 import fetch from 'cross-fetch';
 const axios = require('axios').default;
 

@@ -9,6 +9,7 @@ import DishDetail from './Dishdetail'
 import {Switch, Route, Redirect, withRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
 import { actions } from 'react-redux-form';
+import { TransitionGroup, CSSTransition } from 'react-transition-group';
 
 import { postComment, fetchDishes, fetchComments, fetchPromos, fetchLeaders, teste, teste2, teste3 } from '../redux/ActionCreators';
 import DishDetails from './Dishdetail';
@@ -87,14 +88,22 @@ const mapStateToProps = state => {
         return(
             <div className='container'>
                 <Header/>
-                <Switch>
-                    <Route path='/home' component={HomePage}/>
-                    <Route exact path='/menu' component={ () => <Menu  dishes={this.props.dishes.dishes} />} />
-                    <Route  path='/menu/:dishId' component= {DishWithId} />
-                    <Route exact path='/contactus' component={() => <Contact resetFeedbackForm={this.props.resetFeedbackForm} />} />
-                    <Route exact path='/aboutus' component={ () => <About leaders={this.props.leaders}/>} />
-                    <Redirect to='/home'/>
-                </Switch>              
+                <TransitionGroup>
+                    <CSSTransition key={this.props.location.key} classNames='page' timeout={300}>
+                            <Switch location={this.props.location}>
+                                <Route path='/home' component={HomePage}/>
+                                <Route exact path='/menu' component={ () => <Menu  dishes={this.props.dishes.dishes} />} />
+                                <Route  path='/menu/:dishId' component= {DishWithId} />
+                                <Route exact path='/contactus' component={() => <Contact resetFeedbackForm={this.props.resetFeedbackForm} />} />
+                                <Route exact path='/aboutus' component={ () => <About
+                                                                                leaders={this.props.leaders.leaders}
+                                                                                isLoading={this.props.leaders.isLoading}
+                                                                                errMess={this.props.leaders.errMess} 
+                                                                        />} />
+                                <Redirect to='/home'/>
+                            </Switch> 
+                     </CSSTransition>
+                </TransitionGroup>             
                 <Footer/>
             </div>
 

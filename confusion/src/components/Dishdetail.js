@@ -6,7 +6,8 @@ import {  Col, Label} from 'reactstrap';
 import {Control, LocalForm, Errors} from 'react-redux-form'
 import { Loading } from './Loading';
 import { Comments } from "../redux/comments";
-import {baseUrl} from '../shared/baseUrl';
+import {baseUrl} from '../shared/baseURL';
+import { FadeTransform, Fade, Stagger } from 'react-animation-components';
 //import FormComment from './FormComment';
 //const comments = useSelector(state => state.comments)
 //const dispatch = useDispatch()
@@ -42,13 +43,15 @@ function RenderDish({errMess, isLoading, dish}){
         else if (dish != null){ 
                 return(
                 <div className="col-12 col-md-5 m-1">
-                    <Card>
-                        <CardImg top src={baseUrl + dish.image} alt={dish.name}/>
-                        <CardBody>
-                            <CardTitle>{dish.name}</CardTitle>
-                            <CardText>{dish.description}</CardText>
-                        </CardBody>
-                    </Card> 
+                    <FadeTransform in tranformProps={{ exitTransform:'scale(0.5) translateY(-50%0'}}>
+                        <Card>
+                            <CardImg top src={baseUrl + dish.image} alt={dish.name}/>
+                            <CardBody>
+                                <CardTitle>{dish.name}</CardTitle>
+                                <CardText>{dish.description}</CardText>
+                            </CardBody>
+                        </Card> 
+                    </FadeTransform>
                 </div>  
               );
         }     
@@ -66,18 +69,22 @@ function RenderComments({comments, postComment, dishId, commentsErrMess}) {
                 <div className="col-12 col-md-5 m-1">
                     <h4>Comentários</h4>                
                     <ul className="list-unstyled"> 
-                        {comments.map((comment) => {  
-                                return(                    
-                                         <li key={comment.id}>                        
-                                         <p>
-                                              {comment.comment} <br/>
-                                              -- {comment.author},
-                                {new Intl.DateTimeFormat('en-US', {year:'numeric', month:'short', day:'2-digit'})
-                                                            .format( new Date(Date.parse(comment.date )))}
-                              </p>
-                          </li> 
-                          ) ;        
-                          })}
+                        <Stagger in >
+                            {comments.map((comment) => {  
+                                return( 
+                                        <Fade in>                 
+                                            <li key={comment.id}>                        
+                                            <p>
+                                                {comment.comment} <br/>
+                                                -- {comment.author},
+                                    {new Intl.DateTimeFormat('en-US', {year:'numeric', month:'short', day:'2-digit'})
+                                                                .format( new Date(Date.parse(comment.date )))}
+                                            </p>
+                                            </li> 
+                                    </Fade>  
+                                );        
+                            })}
+                        </Stagger>
                     </ul>  
                     <CommentForm dishId={dishId} postComment={postComment}/>               
                 </div> 
@@ -125,10 +132,10 @@ class CommentForm extends React.Component {
        
         return(
        <div>
-           <Button  color='secondary' onClick = {this.toggleModal}>Submit Comment</Button>
+           <Button  color='secondary' onClick = {this.toggleModal}> <span> <i className="fa fa-pencil fa-lg "></i></span> Submit Comment</Button>
            <Modal isOpen={this.state.showModalComment}>
                <ModalHeader toggle={this.toggleModal}  >
-               Submit                   
+               Submit                 
                </ModalHeader>
                <ModalBody> 
                <LocalForm onSubmit={ ()=> this.handleSubmit}>
