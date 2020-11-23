@@ -3,6 +3,7 @@ import { Breadcrumb, BreadcrumbItem, Card, CardBody, CardHeader, Media, CardSubt
 import { Link } from 'react-router-dom';
 import {Loading} from './Loading';
 import {baseUrl} from '../shared/baseURL';
+import { Fade, Stagger } from 'react-animation-components';
 
 const RenderLeader = ({isLoading, errMess, leaders}) =>{
        
@@ -19,27 +20,33 @@ const RenderLeader = ({isLoading, errMess, leaders}) =>{
     }else{
         return(
         <Media className="mt-3" list> 
-            {
-                leaders.map( (leader) => {
-                    return (  
-                            <div key = {leader.id}>                        
-                                 <Media  className='mb-3'>
-                                    <Media left top href ="#">
-                                        <Media object src={ baseUrl + leader.image}/>             
-                                    </Media>                
-                                    <Media body top className='ml-4 mb-3 text-justify'>
-                                        <Media heading> {leader.name} </Media>
-                    
-                                            {leader.designation ? <CardSubtitle className="mt-2 mb-3 cardsubtitle">{leader.designation}</CardSubtitle> : null}
-                    
-                                            {leader.description}
-                                        
-                                    </Media>                      
-                                </Media>
-                                <hr /> 
-                             </div> 
-                        )})
-            }
+            <Stagger in >
+                {
+                
+                    leaders.map( (leader) => {
+                        return (
+                            <Fade in> 
+                                <div key = {leader.id}>                        
+                                    <Media  className='mb-3'>
+                                        <Media left top href ="#">
+                                            <Media object src={ baseUrl + leader.image}/>             
+                                        </Media>                
+                                        <Media body top className='ml-4 mb-3 text-justify'>
+                                            <Media heading> {leader.name} </Media>
+                        
+                                                {leader.designation ? <CardSubtitle className="mt-2 mb-3 cardsubtitle">{leader.designation}</CardSubtitle> : null}
+                        
+                                                {leader.description}
+                                            
+                                        </Media>                      
+                                    </Media>
+                                    <hr /> 
+                                </div> 
+                            </Fade> 
+                        );
+                    })                     
+                }
+            </Stagger>
          </Media> 
         );}   
 }

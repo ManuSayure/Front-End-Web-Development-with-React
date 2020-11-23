@@ -1,7 +1,7 @@
 import * as ActionTypes  from './ActionTypes';
 import { baseUrl } from '../shared/baseURL';
 import fetch from 'cross-fetch';
-const axios = require('axios').default;
+//const axios = require('axios').default;
 
 export const addComment = (comment) => ({
     type: ActionTypes.ADD_COMMENT,
@@ -41,9 +41,9 @@ export const postComment = (dishId, rating, author, comment) => (dispatch) => {
     .then(response => dispatch(addComment(response)))
     .catch(error =>  { console.log('post comments', error.message); alert('Your comment could not be posted\nError: '+error.message); });
 };
-export const addFeedback = (contactForm) => ({
+export const addFeedback = (feedbackForm) => ({
   type: ActionTypes.ADD_FEEDBACK,
-  payload: commentForm
+  payload: feedbackForm
 });
 export const postFeedback = (firstname, lastname, telnum, email, agree, contactType, message) => (dispatch) => {
 
@@ -80,49 +80,7 @@ export const postFeedback = (firstname, lastname, telnum, email, agree, contactT
   .then(response => response.json())
   .then(response => dispatch(addFeedback(response)))
   .catch(error =>  { console.log('post feedback', error.message); alert('Your feedback could not be posted\nError: '+error.message); });
-};
-
-
- 
-export const teste = (async () => {
-  try {
-    const res = await fetch(baseUrl + 'dishes');
-    
-    if (res.status >= 400) {
-      throw new Error("Bad response from server");
-    }
-    
-    const dishes = await res.json();
-  
-    console.log(dishes);
-  } catch (err) {
-    console.error(err);
-  }
-})();
-export const teste2 =  fetch(baseUrl + 'dishes')
-        .then(res => {
-        if (res.status >= 400) {
-            throw new Error("Bad response from server");
-        }
-        return res.json();
-        })
-        .then(dishes => {
-        console.log(dishes);
-        })
-        .catch(err => {
-        console.error(err);
-        });
-export function teste3() {
-     
-      return function(dispatch) {
-        dispatch(dishesLoading(true));
-       return axios.get(baseUrl + 'dishes')
-            .then(({ data }) => {
-             console.log(data);
-             dispatch(addDishes(data));});
-            };
-          }
-               
+};               
 export  const fetchDishes = () => (dispatch) => {
 
     dispatch(dishesLoading(true));
