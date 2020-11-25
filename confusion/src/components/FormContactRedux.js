@@ -48,11 +48,13 @@ class FormContatctRedux extends React.Component{
         this.setState({[name]:value});
         
     };
-    handleSubmit(values){      
-       // event.preventDefault();
-        this.props.resetFeedbackForm();
+    handleSubmit(values){   
         console.log('Current State is: ' + JSON.stringify(values));
-        alert('Current State is: ' + JSON.stringify(values));  
+        alert('Current State is: ' + JSON.stringify(values));     
+       // event.preventDefault();
+        this.props.postFeedback(values);
+        this.props.resetFeedbackForm();
+        
         
       this.resetForm();  
         

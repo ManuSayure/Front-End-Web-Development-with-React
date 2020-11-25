@@ -63,7 +63,7 @@ const Contact = (props) =>{
             <div className="row row-content">
                  <div className="col-12">
                     <h3  onClick={() => setOpen(!open)} style={{cursor: "pointer",}}>                             
-                                Send us your Feedback</h3>
+                    <span> <i className="fa fa-pencil fa-lg "></i></span>   Send us your Feedback</h3>
                 </div>
                 <div className="col-12">
                 { 
