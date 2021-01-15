@@ -2,14 +2,16 @@ import React,  { useState } from 'react';
 import { Collapse, Jumbotron, Nav, Navbar, NavbarBrand, NavbarToggler, NavItem, Modal, ModalBody, ModalHeader, Button } from 'reactstrap';
 import {NavLink} from 'react-router-dom';
 import {Form, Label, FormGroup, Input} from 'reactstrap';
-import ModalLogin from './ModalLogin';
+import FormLogin from './FormLogin';
+import SignIn from './testeForm';
+import {iconeSpan} from  './ButtonLogin';
 
 class Header extends React.Component{
     constructor(props){
         super(props);
         this.state = {
             isNavOpen: false,
-            isModalOpen: false
+            isModalOpen: false,
         };
         this.toggleNav = this.toggleNav.bind(this);
         this.toggleModal = this.toggleModal.bind(this);
@@ -36,7 +38,12 @@ class Header extends React.Component{
         });
       }   
 
-    
+      handleLogout = (event) =>{
+          event.preventDefault();
+        localStorage.removeItem('username');
+        localStorage.removeItem('remember');
+        localStorage.removeItem('logado');
+    } 
   
     render(){
         return(
@@ -79,7 +86,16 @@ class Header extends React.Component{
                                 </Nav>
                                 <Nav className="ml-auto" navbar>
                                         <NavItem>
-                                            <Button outline onClick={this.toggleModal}><span className="fa fa-sign-in fa-lg"></span> Login</Button>
+                                        <Button outline onClick={localStorage.getItem('logado')? this.handleLogout : this.toggleModal}>
+                                            <span
+                                               
+                                                className = {localStorage.getItem('logado') ? "fa fa-sign-out fa-lg"
+                                                                                             :  "fa fa-sign-in fa-lg"}                                                
+                                            >
+                                            </span>
+                                            {localStorage.getItem('logado') ? "Logout" : "Login"}
+
+                                        </Button>
                                         </NavItem>
                                     </Nav>
         
@@ -103,7 +119,8 @@ class Header extends React.Component{
                 <Modal toggle={this.toggleModal} isOpen={this.state.isModalOpen} >
                 <ModalHeader >Login</ModalHeader>
                 <ModalBody> 
-                    <Form onSubmit={this.handleLogin}>
+                    <FormLogin toggleModal= {() => this.toggleModal()}/>
+                 {/**<Form onSubmit={this.handleLogin}>
                         <FormGroup>
                             <Label htmlFor="username">Username</Label>
                             <Input type="text" id="username" name="username"
@@ -122,7 +139,8 @@ class Header extends React.Component{
                             </Label>
                         </FormGroup>
                         <Button type="submit" value="submit" color="primary">Login</Button>
-                    </Form>             
+                    </Form>  
+        */}           
                 </ModalBody>
             </Modal>
             </React.Fragment>

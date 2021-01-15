@@ -3,9 +3,10 @@ import {Loading} from './Loading';
 import { Card, CardBody, CardImg, CardSubtitle, CardText, CardTitle } from 'reactstrap';
 import {baseUrl} from '../shared/baseURL';
 import { FadeTransform } from 'react-animation-components';
+import {Error} from './messenges/messenges';
 
 const RenderCard = ({item, isLoading, errMess}) => {
-    console.log(isLoading);
+    console.log(errMess);
    
   
         if (isLoading) {
@@ -15,39 +16,45 @@ const RenderCard = ({item, isLoading, errMess}) => {
         }
         else if (errMess) {
             return(
-                    <h4>{errMess}</h4>
+                   < Error errMess = {errMess} />
             );
         }
-         else{ 
-            return( 
+        else{ 
+            if(item){
+                return(  
                     <div className="col-12 col-md m-1">
-                        <FadeTransform in transformProps={{exitTransform:'scale(0.5) translateY(-50%)'}}>                        
-                            <Card>
-                                <CardImg src={baseUrl + item.image}/>
-                                <CardBody>
-                                    <CardTitle>{item.name}</CardTitle>
-                                    {item.designation ? <CardSubtitle>{item.designation}</CardSubtitle> : null}
-                                    <CardText className="text-justify">{item.description}</CardText>
-                                </CardBody>
-                            </Card>
-                        </FadeTransform>
-                    </div>
+                       <FadeTransform in transformProps={{exitTransform:'scale(0.5) translateY(-50%)'}}>                        
+                           <Card>
+                               <CardImg src={baseUrl + item.image}/>
+                               <CardBody>
+                                   <CardTitle>{item.name}</CardTitle>
+                                   {item.designation ? <CardSubtitle>{item.designation}</CardSubtitle> : null}
+                                   <CardText className="text-justify">{item.description}</CardText>
+                               </CardBody>
+                           </Card>
+                       </FadeTransform>
+                   </div>
             );
+            }
+           
         }
     
 };
 const Home = (props) =>{
    
-    console.log(props.dishesLoading);
-    console.log(props.promoLoading);
-    console.log(props.leaderLoading);
-    console.log(props.dish);
-    console.log(props.promotion)
-    console.log(props.leader)
+    console.log( 
+        props.dishesLoading,
+        props.promoLoading, 
+        props.leaderLoading, props.dishErrMess);
+    //console.log(props.promoLoading);
+   // console.log(props.leaderLoading);
+   // console.log(props.dish);
+    //console.log(props.promotion)
+    //console.log(props.leader)
     const RenderListCards = () => {
         return(
             <div className="row align-items-start">
-                <RenderCard key= {1}  item={props.dish} isLoading={props.dishesLoading} errMess={props.disheErrMess}/>
+                <RenderCard key= {1}  item={props.dish} isLoading={props.dishesLoading} errMess={ props.dishErrMess}/>
                 <RenderCard key ={2} item= {props.promotion} isLoading={props.promoLoading} errMess={props.promoErrMess}  />
                 <RenderCard key = {3} item= {props.leader} isLoading={props.leaderLoading} errMess={props.leaderErrMess}/>
         </div> 
