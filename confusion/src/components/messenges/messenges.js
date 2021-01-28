@@ -1,5 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
+ 
+// ${({theme}) => theme.text}
+//${({theme})=> theme.sombra}
 
 const ContainerDiv = styled.div`
   background-color:white ;
@@ -10,12 +13,13 @@ const Conteudo = styled.section`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  color: ${({theme}) => theme.text}
+  color: red;
+  border: 1px solid red;
   border-radius: 5px;
-  box-shadow: 4px 4px 20px 0px ${({theme})=> theme.sombra};
+  box-shadow: 2px 2px 3px 0px red;
   padding: 20px;
   width: 100%;
-  background:#f98fa7;
+  background:#fff;
   @media( max-width: 800px ){
     
     flex-direction: column;
